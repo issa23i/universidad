@@ -84,9 +84,9 @@ public class Aula implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Aula [id=" + id + ", numAula=" + numAula + ", medidas=" + medidas + ", cantidadPupitres="
+		return "Aula {id=" + id + ", numAula=" + numAula + ", medidas=" + medidas + ", cantidadPupitres="
 				+ cantidadPupitres + ", pizarron=" + pizarron + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
-				+ fechaModificacion + "]";
+				+ fechaModificacion + "}";
 	}
 
 	@Override

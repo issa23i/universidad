@@ -88,8 +88,8 @@ public class Pabellon implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Pabellon [id=" + id + ", mts2=" + mts2 + ", nombre=" + nombre + ", direccion=" + direccion
-				+ ", fechaAlta=" + fechaAlta + ", fechaUltimaModificacion=" + fechaUltimaModificacion + "]";
+		return "Pabellon {id=" + id + ", mts2=" + mts2 + ", nombre=" + nombre + ", direccion=" + direccion
+				+ ", fechaAlta=" + fechaAlta + ", fechaUltimaModificacion=" + fechaUltimaModificacion + "}";
 	}
 
 
