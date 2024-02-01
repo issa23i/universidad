@@ -3,17 +3,49 @@ package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "pabellones")
 public class Pabellon implements Serializable{
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name = "metros_cuadrados")
 	private Double mts2;
+	@Column(name = "nombre_pabellon", unique = true, nullable = false)
 	private String nombre;
+	@Embedded
+	@AttributeOverrides({
+		@AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal")),
+		@AttributeOverride(name = "dpto", column = @Column( name = "departamento"))
+	})
 	private Direccion direccion;
+	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
+	@Column(name = "fecha_modificacion")
 	private LocalDateTime fechaModificacion;
+	@OneToMany(
+			mappedBy = "pabellon",
+			fetch = FetchType.LAZY
+			)
+	private Set<Aula> aulas;
 	
-
 	public Pabellon() {}
 
 
@@ -85,6 +117,25 @@ public class Pabellon implements Serializable{
 		this.fechaModificacion = fechaModificacion;
 	}
 
+
+	public Set<Aula> getAulas() {
+		return aulas;
+	}
+
+
+	public void setAulas(Set<Aula> aulas) {
+		this.aulas = aulas;
+	}
+	
+	@PrePersist
+	private void antesDePersistir() {
+		this.fechaAlta = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	private void antesDeUpdate() {
+		this.fechaModificacion = LocalDateTime.now();
+	}
 
 	@Override
 	public String toString() {

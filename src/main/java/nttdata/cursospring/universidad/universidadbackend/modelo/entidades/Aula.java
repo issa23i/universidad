@@ -4,16 +4,54 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+
 import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.Pizarron;
 
+@Entity
+@Table(name = "aulas")
 public class Aula implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(name = "numero_aula", nullable = false)
 	private Integer numAula;
+	@Column(name = "medidas_mtsxmts")
 	private String medidas;
+	@Column(name = "cantidad_pupitres")
 	private Integer cantidadPupitres;
+	@Column(name = "tipo_pizarron")
+	@Enumerated(EnumType.STRING)
 	private Pizarron pizarron;
+	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
+	@Column(name = "fecha_modificacion")
 	private LocalDateTime fechaModificacion;
+	@ManyToOne(
+			optional = true,
+			cascade = {
+					CascadeType.PERSIST,
+					CascadeType.MERGE
+			}
+			)
+	@JoinColumn(
+			name = "pabellon_id",
+			foreignKey = @ForeignKey(name = "FK_PABELLON_ID")
+			)
+	private Pabellon pabellon;
 	
 	public Aula() {}
 
@@ -82,6 +120,25 @@ public class Aula implements Serializable {
 		this.fechaModificacion = fechaModificacion;
 	}
 
+	
+	public Pabellon getPabellon() {
+		return pabellon;
+	}
+
+	public void setPabellon(Pabellon pabellon) {
+		this.pabellon = pabellon;
+	}
+
+	@PrePersist
+	private void antesDePersistir() {
+		this.fechaAlta = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	private void antesDeUpdate() {
+		this.fechaModificacion = LocalDateTime.now();
+	}
+	
 	@Override
 	public String toString() {
 		return "Aula {id=" + id + ", numAula=" + numAula + ", medidas=" + medidas + ", cantidadPupitres="

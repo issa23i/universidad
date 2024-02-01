@@ -4,13 +4,31 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "carreras")
 public class Carrera implements Serializable {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable = false, unique = true, length = 80)
 	private String nombre;
+	@Column(name = "cantidad_materias")
 	private Integer cantidadMaterias;
+	@Column(name = "cantidad_anyos")
 	private Integer cantidadAnyos;
+	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
+	@Column(name = "fecha_modificacion")
 	private LocalDateTime fechaModificacion;
 	
 	public Carrera() {}
@@ -69,6 +87,16 @@ public class Carrera implements Serializable {
 
 	public void setFechaModificacion(LocalDateTime fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+	
+	@PrePersist
+	private void antesDePersistir() {
+		this.fechaAlta = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	private void antesDeUpdate() {
+		this.fechaModificacion = LocalDateTime.now();
 	}
 
 	@Override

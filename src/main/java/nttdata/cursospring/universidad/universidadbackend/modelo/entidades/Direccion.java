@@ -2,12 +2,15 @@ package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Direccion implements Serializable {
 	
 	private String calle;
 	private String numero;
 	private String codigoPostal;
-	private String departamento;
+	private String dpto;
 	private String piso;
 	private String localidad;
 	
@@ -15,12 +18,12 @@ public class Direccion implements Serializable {
 		
 	}
 
-	public Direccion(String calle, String numero, String codigoPostal, String departamento, String piso,
+	public Direccion(String calle, String numero, String codigoPostal, String dpto, String piso,
 			String localidad) {
 		this.calle = calle;
 		this.numero = numero;
 		this.codigoPostal = codigoPostal;
-		this.departamento = departamento;
+		this.dpto = dpto;
 		this.piso = piso;
 		this.localidad = localidad;
 	}
@@ -49,12 +52,12 @@ public class Direccion implements Serializable {
 		this.codigoPostal = codigoPostal;
 	}
 
-	public String getDepartamento() {
-		return departamento;
+	public String getDpto() {
+		return dpto;
 	}
 
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
+	public void setDpto(String dpto) {
+		this.dpto = dpto;
 	}
 
 	public String getPiso() {
@@ -75,8 +78,8 @@ public class Direccion implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Direccion {calle=" + calle + ", numero=" + numero + ", codigoPostal=" + codigoPostal + ", departamento="
-				+ departamento + ", piso=" + piso + ", localidad=" + localidad + "}";
+		return "Direccion {calle=" + calle + ", numero=" + numero + ", codigoPostal=" + codigoPostal + ", dpto="
+				+ dpto + ", piso=" + piso + ", localidad=" + localidad + "}";
 	}
 	
 	
