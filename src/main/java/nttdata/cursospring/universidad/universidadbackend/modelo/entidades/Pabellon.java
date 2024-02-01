@@ -11,7 +11,7 @@ public class Pabellon implements Serializable{
 	private String nombre;
 	private Direccion direccion;
 	private LocalDateTime fechaAlta;
-	private LocalDateTime fechaUltimaModificacion;
+	private LocalDateTime fechaModificacion;
 	
 
 	public Pabellon() {}
@@ -76,20 +76,20 @@ public class Pabellon implements Serializable{
 	}
 
 
-	public LocalDateTime getFechaUltimaModificacion() {
-		return fechaUltimaModificacion;
+	public LocalDateTime getFechaModificacion() {
+		return fechaModificacion;
 	}
 
 
-	public void setFechaUltimaModificacion(LocalDateTime fechaUltimaModificacion) {
-		this.fechaUltimaModificacion = fechaUltimaModificacion;
+	public void setFechaModificacion(LocalDateTime fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 
 	@Override
 	public String toString() {
 		return "Pabellon {id=" + id + ", mts2=" + mts2 + ", nombre=" + nombre + ", direccion=" + direccion
-				+ ", fechaAlta=" + fechaAlta + ", fechaUltimaModificacion=" + fechaUltimaModificacion + "}";
+				+ ", fechaAlta=" + fechaAlta + ", fechaModificacion=" + fechaModificacion + "}";
 	}
 
 
