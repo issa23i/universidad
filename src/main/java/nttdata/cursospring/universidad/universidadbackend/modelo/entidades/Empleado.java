@@ -2,12 +2,27 @@ package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
 import java.math.BigDecimal;
 
+import jakarta.persistence.*;
 import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
-
+@Entity
+@Table(name = "empleados")
+@PrimaryKeyJoinColumn(name = "persona_id")
 public class Empleado extends Persona{
 	
 	private BigDecimal sueldo;
+	@Column(name = "tipo_empleado")
+	@Enumerated(EnumType.STRING)
 	private TipoEmpleado tipoEmpleado;
+
+	@OneToOne(
+			optional = true,
+			cascade = CascadeType.ALL
+	)
+	@JoinColumn(
+			name = "pabellon_id",
+			foreignKey = @ForeignKey(name = "FK_PABELLON_ID")
+	)
+	private Pabellon pabellon;
 	
 	public Empleado() {
 		super();
@@ -36,6 +51,21 @@ public class Empleado extends Persona{
 		this.tipoEmpleado = tipoEmpleado;
 	}
 
-	
-	
+	public Pabellon getPabellon() {
+		return pabellon;
+	}
+
+	public void setPabellon(Pabellon pabellon) {
+		this.pabellon = pabellon;
+	}
+
+	@Override
+	public String toString() {
+		return super.toString() +
+				"\tEmpleado{" +
+				"sueldo=" + sueldo +
+				", tipoEmpleado=" + tipoEmpleado +
+				", pabellon=" + pabellon +
+				'}';
+	}
 }

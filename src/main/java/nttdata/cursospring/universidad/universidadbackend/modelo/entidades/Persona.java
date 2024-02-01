@@ -4,16 +4,32 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import jakarta.persistence.*;
 import org.springframework.cglib.core.Local;
 
+@Entity
+@Table(name= "personas")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona implements Serializable {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@Column(nullable = false, length = 60)
 	private String nombre;
+	@Column(nullable = false, length = 60)
 	private String apellido;
+	@Column(nullable = false, unique = true, length = 60)
 	private String dni;
+	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
+	@Column(name = "fecha_modificacion")
 	private LocalDateTime fechaModificacion;
+	@Embedded
+	@AttributeOverrides({
+			@AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal")),
+			@AttributeOverride(name = "dpto", column = @Column( name = "departamento"))
+	})
 	private Direccion direccion;
 	
 	protected Persona() {}
@@ -81,6 +97,17 @@ public abstract class Persona implements Serializable {
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
 	}
+
+	@PrePersist
+	private void antesDePersistir() {
+		this.fechaAlta = LocalDateTime.now();
+	}
+
+	@PreUpdate
+	private void antesDeUpdate() {
+		this.fechaModificacion = LocalDateTime.now();
+	}
+
 
 	@Override
 	public String toString() {
