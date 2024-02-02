@@ -1,6 +1,5 @@
 package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
-import java.time.LocalDateTime;
 
 public class Alumno extends Persona {
 
