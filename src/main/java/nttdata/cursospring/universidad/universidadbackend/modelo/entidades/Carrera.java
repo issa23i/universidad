@@ -1,25 +1,23 @@
 package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
-import javax.persistence.*;
-
 @Entity
 @Table(name = "carreras")
 public class Carrera implements Serializable {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(nullable = false, unique = true, length = 80)
 	private String nombre;
 	@Column(name = "cantidad_materias")
-	private Integer cantidadMaterias;
-	@Column(name = "cantidad_anyos")
-	private Integer cantidadAnyos;
+	private Integer cantidaMaterias;
+	@Column(name = "cantidad_anios")
+	private Integer cantidadAnios;
 	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
 	@Column(name = "fecha_modificacion")
@@ -34,14 +32,15 @@ public class Carrera implements Serializable {
 			fetch = FetchType.LAZY
 	)
 	private Set<Profesor> profesores;
-	public Carrera() {}
 
-	public Carrera(Integer id, String nombre, Integer cantidadMaterias, Integer cantidadAnyos) {
-		super();
+	public Carrera() {
+	}
+
+	public Carrera(Integer id, String nombre, Integer cantidaMaterias, Integer cantidadAnios) {
 		this.id = id;
 		this.nombre = nombre;
-		this.cantidadMaterias = cantidadMaterias;
-		this.cantidadAnyos = cantidadAnyos;
+		this.cantidaMaterias = cantidaMaterias;
+		this.cantidadAnios = cantidadAnios;
 	}
 
 	public Integer getId() {
@@ -60,20 +59,20 @@ public class Carrera implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public Integer getCantidadMaterias() {
-		return cantidadMaterias;
+	public Integer getCantidaMaterias() {
+		return cantidaMaterias;
 	}
 
-	public void setCantidadMaterias(Integer cantidadMaterias) {
-		this.cantidadMaterias = cantidadMaterias;
+	public void setCantidaMaterias(Integer cantidaMaterias) {
+		this.cantidaMaterias = cantidaMaterias;
 	}
 
-	public Integer getCantidadAnyos() {
-		return cantidadAnyos;
+	public Integer getCantidadAnios() {
+		return cantidadAnios;
 	}
 
-	public void setCantidadAnyos(Integer cantidadAnyos) {
-		this.cantidadAnyos = cantidadAnyos;
+	public void setCantidadAnios(Integer cantidadAnios) {
+		this.cantidadAnios = cantidadAnios;
 	}
 
 	public LocalDateTime getFechaAlta() {
@@ -109,40 +108,37 @@ public class Carrera implements Serializable {
 	}
 
 	@PrePersist
-	private void antesDePersistir() {
+	private void antesDePersistir(){
 		this.fechaAlta = LocalDateTime.now();
 	}
-	
+
 	@PreUpdate
-	private void antesDeUpdate() {
+	private void antesDeUpdate(){
 		this.fechaModificacion = LocalDateTime.now();
 	}
 
 	@Override
 	public String toString() {
-		return "Carrera {id=" + id + ", nombre=" + nombre + ", cantidadMaterias=" + cantidadMaterias
-				+ ", cantidadAnyos=" + cantidadAnyos + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
-				+ fechaModificacion + "}";
+		return "Carrera{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", cantidaMaterias=" + cantidaMaterias +
+				", cantidadAnios=" + cantidadAnios +
+				", fechaAlta=" + fechaAlta +
+				", fechaModificacion=" + fechaModificacion +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Carrera carrera = (Carrera) o;
+		return id.equals(carrera.id) && nombre.equals(carrera.nombre);
 	}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, nombre);
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Carrera other = (Carrera) obj;
-		return Objects.equals(id, other.id) && Objects.equals(nombre, other.nombre);
-	}
-	
-	 
-	
-
 }

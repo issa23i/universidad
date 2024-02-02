@@ -1,21 +1,23 @@
 package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
+
+
+import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.Pizarron;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import javax.persistence.*;
-
-import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.Pizarron;
-
 @Entity
 @Table(name = "aulas")
 public class Aula implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(name = "numero_aula", nullable = false)
-	private Integer numAula;
+	private Integer nroAula;
 	@Column(name = "medidas_mtsxmts")
 	private String medidas;
 	@Column(name = "cantidad_pupitres")
@@ -25,27 +27,27 @@ public class Aula implements Serializable {
 	private Pizarron pizarron;
 	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
-	@Column(name = "fecha_modificacion")
-	private LocalDateTime fechaModificacion;
 	@ManyToOne(
 			optional = true,
 			cascade = {
-					CascadeType.PERSIST,
-					CascadeType.MERGE
+					CascadeType.MERGE,
+					CascadeType.PERSIST
 			}
-			)
+	)
 	@JoinColumn(
 			name = "pabellon_id",
 			foreignKey = @ForeignKey(name = "FK_PABELLON_ID")
-			)
+	)
 	private Pabellon pabellon;
-	
-	public Aula() {}
+	@Column(name = "fecha_modificacion")
+	private LocalDateTime fechaModificacion;
 
-	public Aula(Integer id, Integer numAula, String medidas, Integer cantidadPupitres, Pizarron pizarron) {
-		super();
+	public Aula() {
+	}
+
+	public Aula(Integer id, Integer nroAula, String medidas, Integer cantidadPupitres, Pizarron pizarron) {
 		this.id = id;
-		this.numAula = numAula;
+		this.nroAula = nroAula;
 		this.medidas = medidas;
 		this.cantidadPupitres = cantidadPupitres;
 		this.pizarron = pizarron;
@@ -59,12 +61,12 @@ public class Aula implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getNumAula() {
-		return numAula;
+	public Integer getNroAula() {
+		return nroAula;
 	}
 
-	public void setNumAula(Integer numAula) {
-		this.numAula = numAula;
+	public void setNroAula(Integer nroAula) {
+		this.nroAula = nroAula;
 	}
 
 	public String getMedidas() {
@@ -107,7 +109,6 @@ public class Aula implements Serializable {
 		this.fechaModificacion = fechaModificacion;
 	}
 
-	
 	public Pabellon getPabellon() {
 		return pabellon;
 	}
@@ -117,40 +118,38 @@ public class Aula implements Serializable {
 	}
 
 	@PrePersist
-	private void antesDePersistir() {
+	private void antesDePersistir(){
 		this.fechaAlta = LocalDateTime.now();
 	}
-	
+
 	@PreUpdate
-	private void antesDeUpdate() {
+	private void antesDeUpdate(){
 		this.fechaModificacion = LocalDateTime.now();
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Aula {id=" + id + ", numAula=" + numAula + ", medidas=" + medidas + ", cantidadPupitres="
-				+ cantidadPupitres + ", pizarron=" + pizarron + ", fechaAlta=" + fechaAlta + ", fechaModificacion="
-				+ fechaModificacion + "}";
+		return "Aula{" +
+				"id=" + id +
+				", nroAula=" + nroAula +
+				", medidas='" + medidas + '\'' +
+				", cantidadPupitres=" + cantidadPupitres +
+				", pizarron=" + pizarron +
+				", fechaAlta=" + fechaAlta +
+				", fechaModificacion=" + fechaModificacion +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Aula aula = (Aula) o;
+		return id.equals(aula.id) && nroAula.equals(aula.nroAula);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, numAula);
+		return Objects.hash(id, nroAula);
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Aula other = (Aula) obj;
-		return Objects.equals(id, other.id) && Objects.equals(numAula, other.numAula);
-	}
-
-		
-	
-	
 }

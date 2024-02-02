@@ -1,19 +1,20 @@
 package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
-import java.math.BigDecimal;
+
+import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
 
 import javax.persistence.*;
-import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "empleados")
 @PrimaryKeyJoinColumn(name = "persona_id")
-public class Empleado extends Persona{
-	
+public class Empleado extends Persona {
+
 	private BigDecimal sueldo;
 	@Column(name = "tipo_empleado")
 	@Enumerated(EnumType.STRING)
 	private TipoEmpleado tipoEmpleado;
-
 	@OneToOne(
 			optional = true,
 			cascade = CascadeType.ALL
@@ -23,16 +24,14 @@ public class Empleado extends Persona{
 			foreignKey = @ForeignKey(name = "FK_PABELLON_ID")
 	)
 	private Pabellon pabellon;
-	
+
 	public Empleado() {
-		super();
 	}
 
 	public Empleado(Integer id, String nombre, String apellido, String dni, Direccion direccion, BigDecimal sueldo, TipoEmpleado tipoEmpleado) {
 		super(id, nombre, apellido, dni, direccion);
 		this.sueldo = sueldo;
-		this.tipoEmpleado= tipoEmpleado;
-		// TODO Auto-generated constructor stub
+		this.tipoEmpleado = tipoEmpleado;
 	}
 
 	public BigDecimal getSueldo() {
@@ -65,7 +64,6 @@ public class Empleado extends Persona{
 				"\tEmpleado{" +
 				"sueldo=" + sueldo +
 				", tipoEmpleado=" + tipoEmpleado +
-				", pabellon=" + pabellon +
 				'}';
 	}
 }

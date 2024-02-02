@@ -1,8 +1,6 @@
 package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
 import javax.persistence.*;
-
-
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -10,7 +8,7 @@ import java.util.Set;
 @Table(name = "profesores")
 @PrimaryKeyJoinColumn(name = "persona_id")
 public class Profesor extends Persona {
-	
+
 	private BigDecimal sueldo;
 	@ManyToMany(
 			fetch = FetchType.LAZY,
@@ -25,22 +23,13 @@ public class Profesor extends Persona {
 			inverseJoinColumns = @JoinColumn(name = "carrera_id")
 	)
 	private Set<Carrera> carreras;
+
 	public Profesor() {
-		super();
 	}
 
 	public Profesor(Integer id, String nombre, String apellido, String dni, Direccion direccion, BigDecimal sueldo) {
 		super(id, nombre, apellido, dni, direccion);
 		this.sueldo = sueldo;
-		// TODO Auto-generated constructor stub
-	}
-
-	public Set<Carrera> getCarreras() {
-		return carreras;
-	}
-
-	public void setCarreras(Set<Carrera> carreras) {
-		this.carreras = carreras;
 	}
 
 	public BigDecimal getSueldo() {
@@ -51,12 +40,19 @@ public class Profesor extends Persona {
 		this.sueldo = sueldo;
 	}
 
+	public Set<Carrera> getCarreras() {
+		return carreras;
+	}
+
+	public void setCarreras(Set<Carrera> carreras) {
+		this.carreras = carreras;
+	}
+
 	@Override
 	public String toString() {
-		return  super.toString() +
+		return super.toString() +
 				"\tProfesor{" +
 				"sueldo=" + sueldo +
-				", carreras=" + carreras +
 				'}';
 	}
 }

@@ -1,13 +1,12 @@
 package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import javax.persistence.*;
-
 @Entity
-@Table(name= "personas")
+@Table(name = "personas")
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Persona implements Serializable {
 
@@ -18,7 +17,7 @@ public abstract class Persona implements Serializable {
 	private String nombre;
 	@Column(nullable = false, length = 60)
 	private String apellido;
-	@Column(nullable = false, unique = true, length = 60)
+	@Column(nullable = false, unique = true, length = 10)
 	private String dni;
 	@Column(name = "fecha_alta")
 	private LocalDateTime fechaAlta;
@@ -27,11 +26,12 @@ public abstract class Persona implements Serializable {
 	@Embedded
 	@AttributeOverrides({
 			@AttributeOverride(name = "codigoPostal", column = @Column(name = "codigo_postal")),
-			@AttributeOverride(name = "dpto", column = @Column( name = "departamento"))
+			@AttributeOverride(name = "dpto", column = @Column(name = "departamento"))
 	})
 	private Direccion direccion;
-	
-	protected Persona() {}
+
+	public Persona() {
+	}
 
 	public Persona(Integer id, String nombre, String apellido, String dni, Direccion direccion) {
 		this.id = id;
@@ -98,43 +98,39 @@ public abstract class Persona implements Serializable {
 	}
 
 	@PrePersist
-	private void antesDePersistir() {
+	private void antesDePersistir(){
 		this.fechaAlta = LocalDateTime.now();
 	}
 
 	@PreUpdate
-	private void antesDeUpdate() {
+	private void antesDeUpdate(){
 		this.fechaModificacion = LocalDateTime.now();
 	}
 
-
 	@Override
 	public String toString() {
-		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", fechaAlta="
-				+ fechaAlta + ", fechaModificacion=" + fechaModificacion + ", direccion=" + direccion + ", getId()="
-				+ getId() + ", getNombre()=" + getNombre() + ", getApellido()=" + getApellido() + ", getDni()="
-				+ getDni() + ", getFechaAlta()=" + getFechaAlta() + ", getFechaModificacion()=" + getFechaModificacion()
-				+ ", getDireccion()=" + getDireccion() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
+		return "Persona{" +
+				"id=" + id +
+				", nombre='" + nombre + '\'' +
+				", apellido='" + apellido + '\'' +
+				", dni='" + dni + '\'' +
+				", fechaAlta=" + fechaAlta +
+				", fechaModificacion=" + fechaModificacion +
+				", direccion=" + direccion +
+				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Persona persona = (Persona) o;
+		return id.equals(persona.id) && dni.equals(persona.dni);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dni, id);
+		return Objects.hash(id, dni);
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Persona other = (Persona) obj;
-		return Objects.equals(dni, other.dni) && Objects.equals(id, other.id);
-	}
-	
-	
-	
 }
