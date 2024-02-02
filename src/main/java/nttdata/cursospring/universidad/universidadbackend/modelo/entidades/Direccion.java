@@ -2,7 +2,7 @@ package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Embeddable;
+import javax.persistence.*;
 
 @Embeddable
 public class Direccion implements Serializable {

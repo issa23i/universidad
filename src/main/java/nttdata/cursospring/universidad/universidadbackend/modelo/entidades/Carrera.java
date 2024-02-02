@@ -3,15 +3,9 @@ package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "carreras")
@@ -30,7 +24,16 @@ public class Carrera implements Serializable {
 	private LocalDateTime fechaAlta;
 	@Column(name = "fecha_modificacion")
 	private LocalDateTime fechaModificacion;
-	
+	@OneToMany(
+			mappedBy = "carrera",
+			fetch = FetchType.LAZY
+	)
+	private Set<Alumno> alumnos;
+	@ManyToMany(
+			mappedBy = "carreras",
+			fetch = FetchType.LAZY
+	)
+	private Set<Profesor> profesores;
 	public Carrera() {}
 
 	public Carrera(Integer id, String nombre, Integer cantidadMaterias, Integer cantidadAnyos) {
@@ -88,7 +91,23 @@ public class Carrera implements Serializable {
 	public void setFechaModificacion(LocalDateTime fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
 	}
-	
+
+	public Set<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public void setAlumnos(Set<Alumno> alumnos) {
+		this.alumnos = alumnos;
+	}
+
+	public Set<Profesor> getProfesores() {
+		return profesores;
+	}
+
+	public void setProfesores(Set<Profesor> profesores) {
+		this.profesores = profesores;
+	}
+
 	@PrePersist
 	private void antesDePersistir() {
 		this.fechaAlta = LocalDateTime.now();

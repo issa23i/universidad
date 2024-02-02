@@ -4,8 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
+import javax.persistence.*;
 
 @Entity
 @Table(name= "personas")

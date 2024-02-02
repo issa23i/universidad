@@ -2,7 +2,7 @@ package nttdata.cursospring.universidad.universidadbackend.modelo.entidades;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
 @Entity
 @Table(name = "empleados")
