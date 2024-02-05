@@ -12,9 +12,8 @@ public class CarreraComandos implements CommandLineRunner {
     private CarreraDAO servicio;
     @Override
     public void run(String... args) throws Exception {
-        Carrera ingSistemas = new Carrera(null, "Ingeniería en sistemas",50,5);
-        //Carrera save = servicio.save(ingSistemas);
-        Carrera save = this.servicio.save(ingSistemas);
-        System.out.println(save.toString());
+//        Carrera ingSistemas = new Carrera(null, "Ingeniería en sistemas",50,5);
+//        Carrera save = servicio.save(ingSistemas);
+//        System.out.println(save.toString());
     }
 }
