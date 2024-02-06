@@ -1,13 +1,7 @@
 package nttdata.cursospring.universidad.universidadbackend.servicios.contratos;
 
-import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.Persona;
 
-import java.util.Optional;
 
-public interface AlumnoDAO {
+public interface AlumnoDAO extends PersonaDAO{
 
-    Optional<Persona> findById(Integer id);
-    Persona save(Persona persona);
-    Iterable<Persona> findAll();
-    void deleteById(Integer id);
 }
