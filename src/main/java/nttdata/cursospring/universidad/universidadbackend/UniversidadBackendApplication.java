@@ -29,11 +29,14 @@ public class UniversidadBackendApplication {
 	@Bean
 	public CommandLineRunner runner(){
 		return args -> {
-			Direccion direccion = new Direccion("Ave del paraíso", "7", "44444", "Departamento floritura", "Piso 4º", "Localidad x");
-			Persona alumno = new Alumno(null,"Pepe", "Cuerdas", "99999999R", direccion);
+//			Direccion direccion = new Direccion("Ave del paraíso", "7", "44444", "Departamento floritura", "Piso 4º", "Localidad x");
+//			Persona alumno = new Alumno(null,"Pepe", "Cuerdas", "99999999R", direccion);
+//
+//			Persona save = servicio.save(alumno);
+//			System.out.println(save.toString());
 
-			Persona save = servicio.save(alumno);
-			System.out.println(save.toString());
+			List<Persona> alumnos = (List<Persona>) servicio.findAll();
+			alumnos.forEach(System.out::println);
 		};
 	}
 
