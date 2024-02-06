@@ -18,12 +18,24 @@ public class CarreraComandos implements CommandLineRunner {
 //        Carrera save = servicio.save(ingSistemas);
 //        System.out.println(save.toString());
 
+        Carrera carrera = null;
         Optional<Carrera> oCarrera = servicio.findById(1);
         if(oCarrera.isPresent()){
-            Carrera carrera = oCarrera.get();
+            carrera = oCarrera.get();
             System.out.println(carrera.toString());
         } else {
             System.out.println("Carrera no encontrada");
         }
+
+        carrera.setCantidaMaterias(65);
+        carrera.setCantidadAnios(6);
+
+        servicio.save(carrera);
+
+        System.out.println(servicio.findById(1).orElse(new Carrera()).toString());
+
+        servicio.deleteById(1);
+        System.out.println(servicio.findById(1).orElse(new Carrera()).toString());
+
     }
 }

@@ -15,9 +15,10 @@ import java.util.List;
 @SpringBootApplication
 public class UniversidadBackendApplication {
 
-
+/**
 	@Autowired
 	private AlumnoDAO servicio;
+	*/
 	public static void main(String[] args) {
 		String[] beanDefinitionNames = SpringApplication.run(UniversidadBackendApplication.class, args).getBeanDefinitionNames();
 //		for (String str : beanDefinitionNames){
@@ -25,7 +26,7 @@ public class UniversidadBackendApplication {
 //		}
 
 	}
-
+/**
 	@Bean
 	public CommandLineRunner runner(){
 		return args -> {
@@ -41,5 +42,5 @@ public class UniversidadBackendApplication {
 
 		};
 	}
-
+*/
 }

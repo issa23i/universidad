@@ -5,5 +5,8 @@ import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.Perso
 import java.util.Optional;
 
 public interface PersonaDAO extends GenericoDAO<Persona> {
-
+    //jpql
+    Optional<Persona> buscarPorNombreYApellido(String nombre, String apellido);
+    Optional<Persona> buscarPorDNI(Integer dni);
+    Iterable<Persona> buscarPersonasPorApellido(String apellido);
 }
