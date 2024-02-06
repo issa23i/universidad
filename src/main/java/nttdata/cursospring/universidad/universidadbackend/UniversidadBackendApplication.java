@@ -34,9 +34,11 @@ public class UniversidadBackendApplication {
 //
 //			Persona save = servicio.save(alumno);
 //			System.out.println(save.toString());
+//
+//			List<Persona> alumnos = (List<Persona>) servicio.findAll();
+//			alumnos.forEach(System.out::println);
 
-			List<Persona> alumnos = (List<Persona>) servicio.findAll();
-			alumnos.forEach(System.out::println);
+
 		};
 	}
 
