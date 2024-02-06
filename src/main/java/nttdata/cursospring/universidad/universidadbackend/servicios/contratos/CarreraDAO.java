@@ -5,5 +5,8 @@ import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.Carre
 import java.util.Optional;
 
 public interface CarreraDAO extends GenericoDAO<Carrera> {
+    Iterable<Carrera> findCarrerasByNombreContains(String nombreCarrera);
+    Iterable<Carrera> findCarrerasByNombreContainsIgnoreCase(String nombreCarrera);
+    Iterable<Carrera> findCarrerasByCantidadAniosAfter(Integer cantidadAnyos);
 
 }
