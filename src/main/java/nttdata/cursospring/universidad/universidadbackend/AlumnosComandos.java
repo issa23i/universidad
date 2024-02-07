@@ -9,11 +9,13 @@ import nttdata.cursospring.universidad.universidadbackend.servicios.contratos.Pe
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
 @Component
+@Order(6)
 public class AlumnosComandos implements CommandLineRunner {
     @Autowired
     @Qualifier("alumnoDAOImpl")

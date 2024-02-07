@@ -4,12 +4,14 @@ import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.Carre
 import nttdata.cursospring.universidad.universidadbackend.servicios.contratos.CarreraDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @Component
+@Order(3)
 public class CarreraComandos implements CommandLineRunner {
     @Autowired
     private CarreraDAO servicio;
