@@ -12,4 +12,6 @@ public interface CarreraRepository extends CrudRepository<Carrera, Integer> {
     Iterable<Carrera> findCarrerasByNombreContainsIgnoreCase(String nombreCarrera);
     //@Query("select c from Carrera c where c.cantidadAnyos > ?1")
     Iterable<Carrera> findCarrerasByCantidadAniosAfter(Integer cantidadAnyos);
+    @Query("select c from Carrera c join c.profesores p where p.nombre=?1 and p.apellido=?2")
+    Iterable<Carrera> buscarCarrerasPorProfesorNombreYApellido(String nombre, String apellido);
 }
