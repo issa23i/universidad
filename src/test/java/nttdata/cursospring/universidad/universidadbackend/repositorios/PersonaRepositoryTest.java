@@ -83,6 +83,6 @@ class PersonaRepositoryTest {
         Iterable<Persona> expectedAlumnnos = alumnoRepository.buscarPersonasPorApellido("González");
 
         //then
-        assertThat( ((List<Persona>)expectedAlumnnos).size() == 2 );
+        assertThat( ((List<Persona>)expectedAlumnnos).size() == 2 ).isTrue();
     }
 }
