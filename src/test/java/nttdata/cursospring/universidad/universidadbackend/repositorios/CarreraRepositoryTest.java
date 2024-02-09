@@ -18,9 +18,9 @@ class CarreraRepositoryTest {
     @BeforeEach
     void setUP(){
         //given
-        carreraRepository.save(DatosDammy.carrera01());
+        carreraRepository.save(DatosDammy.carrera01(false));
         carreraRepository.save(DatosDammy.carrera02());
-        carreraRepository.save(DatosDammy.carrera03());
+        carreraRepository.save(DatosDammy.carrera03(false));
     }
 
     @AfterEach
@@ -64,9 +64,9 @@ class CarreraRepositoryTest {
     @DisplayName("Buscar carreras por profesor asociado")
     void buscarCarrerasPorProfesorNombreYApellido() {
         //given
-        carreraRepository.save(DatosDammy.carrera01());
+        carreraRepository.save(DatosDammy.carrera01(false));
         carreraRepository.save(DatosDammy.carrera02());
-        carreraRepository.save(DatosDammy.carrera03());
+        carreraRepository.save(DatosDammy.carrera03(false));
 
         //when
         Iterable<Carrera> expectedCarrerasProfesor = carreraRepository.buscarCarrerasPorProfesorNombreYApellido("antonio","perez");

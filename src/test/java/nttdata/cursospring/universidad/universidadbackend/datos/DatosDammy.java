@@ -4,6 +4,9 @@ import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.*;
 import nttdata.cursospring.universidad.universidadbackend.modelo.entidades.enumeradores.TipoEmpleado;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DatosDammy {
 
@@ -19,10 +22,33 @@ public class DatosDammy {
         Direccion direccion = new Direccion("Calle agonía", "18","44455","Departamento aas","2º","Castellón");
         return new Empleado(null, "Beatriz", "Suabia","22222222T",direccion,new BigDecimal("21580"), TipoEmpleado.ADMINISTRATIVO);
     }
+    public static Carrera carrera01(boolean conId){
+        Carrera carrera = (conId) ? new Carrera(1,"Ingenieria de Sistemas",50,5) :
+                new Carrera(null,"Ingenieria de Sistemas",50,5);
 
+        return carrera;
+    }
+    public static Carrera carrera02(){
+        return new Carrera(null,"Licenciatura de Sistemas",45,4);
+    }
+
+    public static Carrera carrera03(boolean conId){
+        Carrera carrera = (conId) ? new Carrera(3,"Ingenieria Industrial",60,5) :
+                new Carrera(null,"Ingenieria Industrial",60,5);
+        return carrera;
+    }
     public static Persona profesor01(){
         Direccion direccion = new Direccion("Calle agonía", "18","44455","Departamento aas","2º","Albacete");
         return new Profesor(null,"Martín","Calatrava","333333333G",direccion,new BigDecimal("62500"));
+    }
+
+    public static Persona profesor02(){
+        Direccion direccion = new Direccion("Calle agonía", "18","44455","Departamento aas","2º","Alcorcón");
+        Profesor profesor = new Profesor(null, "Isidro", "Bueno", "253333333G", direccion, new BigDecimal("71707"));
+        Set<Carrera> carrerasProfesor = new HashSet<>();
+        carrerasProfesor.add(carrera02());
+        profesor.setCarreras(carrerasProfesor);
+        return profesor;
     }
 
     public static Persona alumno01(){
@@ -39,16 +65,8 @@ public class DatosDammy {
     }
 
 
-    public static Carrera carrera01(){
-        return new Carrera(null,"Ingenieria de Sistemas",50,5);
-    }
 
-    public static Carrera carrera02(){
-        return new Carrera(null,"Licenciatura de Sistemas",45,4);
-    }
 
-    public static Carrera carrera03(){
-        return new Carrera(null,"Ingenieria Industrial",60,5);
-    }
+
 }
 

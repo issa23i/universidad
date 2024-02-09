@@ -40,6 +40,7 @@ class PersonaRepositoryTest {
         empleadoRepository.saveAll(Arrays.asList(DatosDammy.empleado01(), DatosDammy.empleado02(), DatosDammy.empleado03()));
 
         profesorRepository.save(DatosDammy.profesor01());
+        profesorRepository.save(DatosDammy.profesor02());
     }
 
     @AfterEach
